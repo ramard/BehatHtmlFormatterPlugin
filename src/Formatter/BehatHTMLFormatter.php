@@ -126,6 +126,16 @@ class BehatHTMLFormatter implements Formatter {
     /**
      * @var Scenario[]
      */
+    private $pendingScenarios;
+
+    /**
+     * @var Scenario[]
+     */
+    private $skippedScenarios;
+
+    /**
+     * @var Scenario[]
+     */
     private $passedScenarios;
 
     /**
@@ -363,6 +373,16 @@ class BehatHTMLFormatter implements Formatter {
         return $this->failedScenarios;
     }
 
+    public function getPendingScenarios()
+    {
+        return $this->pendingScenarios;
+    }
+
+    public function getSkippedScenarios()
+    {
+        return $this->skippedScenarios;
+    }
+
     public function getPassedScenarios()
     {
         return $this->passedScenarios;
@@ -502,18 +522,36 @@ class BehatHTMLFormatter implements Formatter {
      */
     public function onAfterScenarioTested(AfterScenarioTested $event)
     {
-        $scenarioPassed = $event->getTestResult()->isPassed();
+        $this->currentScenario->setPassed(false);
+        $this->currentScenario->setPending(false);
+        $this->currentScenario->setSkipped(false);
 
-        if($scenarioPassed) {
-            $this->passedScenarios[] = $this->currentScenario;
-            $this->currentFeature->addPassedScenario();
-        } else {
-            $this->failedScenarios[] = $this->currentScenario;
-            $this->currentFeature->addFailedScenario();
+        switch($event->getTestResult()->getResultCode()){
+            case '0':
+                $this->passedScenarios[] = $this->currentScenario;
+                $this->currentFeature->addPassedScenario();
+                $this->currentScenario->setPassed(true);
+                break;
+            case '10':
+            case '30':
+                $this->skippedScenarios[] = $this->currentScenario;
+                $this->currentFeature->addPendingScenario();
+                $this->currentScenario->setPending(true);
+                break;
+            case '20':
+                $this->pendingScenarios[] = $this->currentScenario;
+                $this->currentFeature->addSkippedScenario();
+                $this->currentScenario->setSkipped(true);
+                break;
+            case '99':
+                $this->failedScenarios[] = $this->currentScenario;
+                $this->currentFeature->addFailedScenario();
+                break;
+            default:
+                break;
         }
 
         $this->currentScenario->setLoopCount(1);
-        $this->currentScenario->setPassed($event->getTestResult()->isPassed());
         $this->currentFeature->addScenario($this->currentScenario);
 
         $print = $this->renderer->renderAfterScenario($this);
@@ -540,6 +578,7 @@ class BehatHTMLFormatter implements Formatter {
      */
     public function onAfterOutlineTested(AfterOutlineTested $event)
     {
+        //@todo - same treatment required as for regular scenarios above (split fails ...)
         $scenarioPassed = $event->getTestResult()->isPassed();
 
         if($scenarioPassed) {

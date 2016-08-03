@@ -19,6 +19,8 @@ class Feature
     private $file;
     private $screenshotFolder;
     private $failedScenarios = 0;
+    private $pendingScenarios = 0;
+    private $skippedScenarios = 0;
     private $passedScenarios = 0;
     private $scenarioCounter = 1;
 
@@ -153,9 +155,28 @@ class Feature
         $this->failedScenarios = $failedScenarios;
     }
 
+    /**
+     * @param int $number
+     */
     public function addFailedScenario($number = 1)
     {
         $this->failedScenarios++;
+    }
+
+    /**
+     * @param int $number
+     */
+    public function addPendingScenario($number = 1)
+    {
+        $this->pendingScenarios++;
+    }
+
+    /**
+     * @param int $number
+     */
+    public function addSkippedScenario($number = 1)
+    {
+        $this->skippedScenarios++;
     }
 
     /**

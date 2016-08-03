@@ -3,6 +3,8 @@
 
 @color-failed: #F56956;
 @color-passed: #00a65a;
+@color-skipped: #f4f4f4;
+@color-pending: #f8efc0;
 
 body {
   background-color: #f9f9f9;
@@ -26,6 +28,18 @@ body {
   &.passed {
     .header {
       background-color: @color-passed;
+    }
+  }
+
+  &.pending {
+    .header {
+      background-color: @color-pending;
+    }
+  }
+
+  &.skipped {
+    .header {
+      background-color: @color-skipped;
     }
   }
 
@@ -130,6 +144,20 @@ body {
           > .panel-heading {
             color: white;
             background-color: @color-failed;
+            background-image: none;
+          }
+        }
+        &.pending {
+          > .panel-heading {
+            color: black;
+            background-color: @color-pending;
+            background-image: none;
+          }
+        }
+        &.skipped {
+          > .panel-heading {
+            color: black;
+            background-color: @color-skipped;
             background-image: none;
           }
         }

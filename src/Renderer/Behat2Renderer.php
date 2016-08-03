@@ -54,46 +54,57 @@ class Behat2Renderer implements RendererInterface {
             $strScePassed = ' <strong class="passed">'.count($obj->getPassedScenarios()).' success</strong>';
         }
 
+        $strScePending = '';
+        if(count($obj->getPendingScenarios()) > 0) {
+            $strScePending = ' <strong class="failed">'.count($obj->getPendingScenarios()).' pending</strong>';
+        }
+
+        $strSceSkipped = '';
+        if(count($obj->getSkippedScenarios()) > 0) {
+            $strSceSkipped = ' <strong class="failed">'.count($obj->getSkippedScenarios()).' skipped</strong>';
+        }
+
         $strSceFailed = '';
         if(count($obj->getFailedScenarios()) > 0) {
             $strSceFailed = ' <strong class="failed">'.count($obj->getFailedScenarios()).' fail</strong>';
         }
 
-        //--> steps results
-        $strStepsPassed = '';
-        if(count($obj->getPassedSteps()) > 0) {
-            $strStepsPassed = ' <strong class="passed">'.count($obj->getPassedSteps()).' success</strong>';
+        //--> Scenarios results
+        $strScenariosPassed = '';
+        if(count($obj->getPassedScenarios()) > 0) {
+            $strScenariosPassed = ' <strong class="passed">'.count($obj->getPassedScenarios()).' success</strong>';
         }
 
-        $strStepsPending = '';
-        if(count($obj->getPendingSteps()) > 0) {
-            $strStepsPending = ' <strong class="pending">'.count($obj->getPendingSteps()).' pending</strong>';
+        $strScenariosPending = '';
+        if(count($obj->getPendingScenarios()) > 0) {
+            $strScenariosPending = ' <strong class="pending">'.count($obj->getPendingScenarios()).' pending</strong>';
         }
 
-        $strStepsSkipped = '';
-        if(count($obj->getSkippedSteps()) > 0) {
-            $strStepsSkipped = ' <strong class="skipped">'.count($obj->getSkippedSteps()).' skipped</strong>';
+        $strScenariosSkipped = '';
+        if(count($obj->getSkippedScenarios()) > 0) {
+            $strScenariosSkipped = ' <strong class="skipped">'.count($obj->getSkippedScenarios()).' skipped</strong>';
         }
 
-        $strStepsFailed = '';
-        if(count($obj->getFailedSteps()) > 0) {
-            $strStepsFailed = ' <strong class="failed">'.count($obj->getFailedSteps()).' fail</strong>';
+        $strScenariosFailed = '';
+        if(count($obj->getFailedScenarios()) > 0) {
+            $strScenariosFailed = ' <strong class="failed">'.count($obj->getFailedScenarios()).' fail</strong>';
         }
 
         //totals
         $featTotal = (count($obj->getFailedFeatures()) + count($obj->getPassedFeatures()));
-        $sceTotal = (count($obj->getFailedScenarios()) + count($obj->getPassedScenarios()));
-        $stepsTotal = (count($obj->getFailedSteps()) + count($obj->getPassedSteps()) + count($obj->getSkippedSteps()) + count($obj->getPendingSteps()));
+//        $sceTotal = (count($obj->getFailedScenarios()) + count($obj->getPassedScenarios())); //@todo roy did this, did it work?
+        $sceTotal = (count($obj->getFailedScenarios()) + count($obj->getPassedScenarios()) + count($obj->getSkippedScenarios()) + count($obj->getPendingScenarios()));
+        $ScenariosTotal = (count($obj->getFailedScenarios()) + count($obj->getPassedScenarios()) + count($obj->getSkippedScenarios()) + count($obj->getPendingScenarios()));
 
-        //list of pending steps to display
+        //list of pending Scenarios to display
         $strPendingList = '';
-        if(count($obj->getPendingSteps()) > 0) {
-            foreach($obj->getPendingSteps() as $pendingStep) {
+        if(count($obj->getPendingScenarios()) > 0) {
+            foreach($obj->getPendingScenarios() as $pendingStep) {
                 $strPendingList .= '
                     <li>'.$pendingStep->getKeyword().' '.htmlentities($pendingStep->getText()).'</li>';
             }
             $strPendingList = '
-            <div class="pending">Pending steps :
+            <div class="pending">Pending Scenarios :
                 <ul>'.$strPendingList.'
                 </ul>
             </div>';
@@ -108,8 +119,8 @@ class Behat2Renderer implements RendererInterface {
                 <p class="scenarios">
                     '.$sceTotal.' scenarios ('.$strScePassed.$strSceFailed.' )
                 </p>
-                <p class="steps">
-                    '.$stepsTotal.' steps ('.$strStepsPassed.$strStepsPending.$strStepsSkipped.$strStepsFailed.' )
+                <p class="Scenarios">
+                    '.$ScenariosTotal.' Scenarios ('.$strScenariosPassed.$strScenariosPending.$strScenariosSkipped.$strScenariosFailed.' )
                 </p>
                 <p class="time">
                 '.$obj->getTimer().' - '.$obj->getMemory().'
@@ -257,7 +268,7 @@ class Behat2Renderer implements RendererInterface {
      */
     public function renderBeforeOutline($obj)
     {
-         //scenario head
+        //scenario head
         $print = '
             <div class="scenario">
                 <ul class="tags">';
@@ -311,10 +322,10 @@ class Behat2Renderer implements RendererInterface {
         $feature = $obj->getCurrentFeature();
         $scenario = $obj->getCurrentScenario();
 
-        $steps = $scenario->getSteps();
-        $step = end($steps); //needed because of strict standards
+        $Scenarios = $scenario->getScenarios();
+        $step = end($Scenarios); //needed because of strict standards
 
-        //path displayed only if available (it's not available in undefined steps)
+        //path displayed only if available (it's not available in undefined Scenarios)
         $strPath = '';
         if($step->getDefinition() !== null) {
             $strPath = $step->getDefinition()->getPath();
@@ -747,7 +758,7 @@ class Behat2Renderer implements RendererInterface {
                         feature.addClass('jq-toggle-opened');
                     });
 
-                $('#behat .summary .counters .steps .passed')
+                $('#behat .summary .counters .Scenarios .passed')
                     .addClass('switcher')
                     .click(function(){
                         var scenario = $('.feature .scenario:has(.passed)');
@@ -759,7 +770,7 @@ class Behat2Renderer implements RendererInterface {
                         feature.addClass('jq-toggle-opened');
                     });
 
-                $('#behat .summary .counters .steps .failed')
+                $('#behat .summary .counters .Scenarios .failed')
                     .addClass('switcher')
                     .click(function(){
                         var scenario = $('.feature .scenario:has(.failed)');
@@ -771,7 +782,7 @@ class Behat2Renderer implements RendererInterface {
                         feature.addClass('jq-toggle-opened');
                     });
 
-                $('#behat .summary .counters .steps .skipped')
+                $('#behat .summary .counters .Scenarios .skipped')
                     .addClass('switcher')
                     .click(function(){
                         var scenario = $('.feature .scenario:has(.skipped)');
@@ -783,7 +794,7 @@ class Behat2Renderer implements RendererInterface {
                         feature.addClass('jq-toggle-opened');
                     });
 
-                $('#behat .summary .counters .steps .pending')
+                $('#behat .summary .counters .Scenarios .pending')
                     .addClass('switcher')
                     .click(function(){
                         var scenario = $('.feature .scenario:has(.pending)');

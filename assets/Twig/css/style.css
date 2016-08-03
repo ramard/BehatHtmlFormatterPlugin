@@ -75,9 +75,16 @@ body {
 .card.passed .header {
   background-color: #00a65a;
 }
+.card.pending .header {
+  background-color: #000;
+}
+.card.skipped .header {
+  background-color: #fff;
+}
 .card.failed .header {
   background-color: #f56956;
 }
+
 .card .header {
   color: #fff;
   border-top-left-radius: 3px;
@@ -151,6 +158,16 @@ body {
 #scenario-overview .feature .details .panel.passed > .panel-heading {
   color: white;
   background-color: #00a65a;
+  background-image: none;
+}
+#scenario-overview .feature .details .panel.pending > .panel-heading {
+  color: black;
+  background-color: #f8efc0;
+  background-image: none;
+}
+#scenario-overview .feature .details .panel.skipped > .panel-heading {
+  color: black;
+  background-color: #f4f4f4;
   background-image: none;
 }
 #scenario-overview .feature .details .panel.failed > .panel-heading {

@@ -27,6 +27,16 @@ class Scenario
     private $passed;
 
     /**
+     * @var bool
+     */
+    private $pending;
+
+    /**
+     * @var bool
+     */
+    private $skipped;
+
+    /**
      * @var Step[]
      */
     private $steps;
@@ -113,11 +123,43 @@ class Scenario
     }
 
     /**
+     * @return boolean
+     */
+    public function isPending()
+    {
+        return $this->pending;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSkipped()
+    {
+        return $this->skipped;
+    }
+
+    /**
      * @param boolean $passed
      */
     public function setPassed($passed)
     {
         $this->passed = $passed;
+    }
+
+    /**
+     * @param boolean $passed
+     */
+    public function setPending($passed)
+    {
+        $this->pending = $passed;
+    }
+
+    /**
+     * @param boolean $passed
+     */
+    public function setSkipped($passed)
+    {
+        $this->skipped = $passed;
     }
 
     /**

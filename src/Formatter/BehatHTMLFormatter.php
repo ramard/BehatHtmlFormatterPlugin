@@ -534,12 +534,12 @@ class BehatHTMLFormatter implements Formatter {
                 break;
             case '10':
             case '30':
-                $this->skippedScenarios[] = $this->currentScenario;
+                $this->pendingScenarios[] = $this->currentScenario;
                 $this->currentFeature->addPendingScenario();
                 $this->currentScenario->setPending(true);
                 break;
             case '20':
-                $this->pendingScenarios[] = $this->currentScenario;
+                $this->skippedScenarios[] = $this->currentScenario;
                 $this->currentFeature->addSkippedScenario();
                 $this->currentScenario->setSkipped(true);
                 break;
@@ -636,13 +636,8 @@ class BehatHTMLFormatter implements Formatter {
                     $exception = $result->getException();
                     if($exception) {
                         $step->setException($exception->getMessage());
-                        switch($result->getResultCode()){
-                            case '20':
-//                                $this->pendingSteps[] = $step;
-                                break;
-                            case '99':
+                        if($result->getResultCode() == '99'){
                                 $this->failedSteps[] = $step;
-                                break;
                         }
                     } else {
                         $step->setOutput($result->getCallResult()->getStdOut());

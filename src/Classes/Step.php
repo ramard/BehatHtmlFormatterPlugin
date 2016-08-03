@@ -165,32 +165,32 @@ class Step
     {
         $this->resultCode = $resultCode;
     }
-
-    /**
+    
+     /**
      * @return bool
      */
     public function isPassed()
     {
         return $this->resultCode == StepResult::PASSED;
     }
-
-    /**
+    
+     /**
      * @return bool
      */
     public function isSkipped()
     {
         return $this->resultCode == StepResult::SKIPPED;
     }
-
-    /**
+    
+     /**
      * @return bool
      */
     public function isPending()
     {
         return ($this->resultCode == StepResult::PENDING || $this->resultCode == StepResult::UNDEFINED);
     }
-
-    /**
+    
+     /**
      * @return bool
      */
     public function isFailed()

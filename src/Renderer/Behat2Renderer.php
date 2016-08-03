@@ -268,7 +268,7 @@ class Behat2Renderer implements RendererInterface {
      */
     public function renderBeforeOutline($obj)
     {
-        //scenario head
+         //scenario head
         $print = '
             <div class="scenario">
                 <ul class="tags">';

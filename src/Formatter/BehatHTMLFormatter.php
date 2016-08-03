@@ -623,24 +623,27 @@ class BehatHTMLFormatter implements Formatter {
         $step->setResult($result);
         $step->setResultCode($result->getResultCode());
 
-        //What is the result of this step ?
         if(is_a($result, 'Behat\Behat\Tester\Result\UndefinedStepResult')) {
-            //pending step -> no definition to load
             $this->pendingSteps[] = $step;
         } else {
             if(is_a($result, 'Behat\Behat\Tester\Result\SkippedStepResult')) {
-                //skipped step
                 /** @var ExecutedStepResult $result */
                 $step->setDefinition($result->getStepDefinition());
                 $this->skippedSteps[] = $step;
             } else {
-                //failed or passed
                 if($result instanceof ExecutedStepResult) {
                     $step->setDefinition($result->getStepDefinition());
                     $exception = $result->getException();
                     if($exception) {
                         $step->setException($exception->getMessage());
-                        $this->failedSteps[] = $step;
+                        switch($result->getResultCode()){
+                            case '20':
+//                                $this->pendingSteps[] = $step;
+                                break;
+                            case '99':
+                                $this->failedSteps[] = $step;
+                                break;
+                        }
                     } else {
                         $step->setOutput($result->getCallResult()->getStdOut());
                         $this->passedSteps[] = $step;

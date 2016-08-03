@@ -55,21 +55,22 @@
             <div class="canvas-holder">
                 <canvas id="chart-features" width="300" height="300"/>
             </div>
-            {{ failedFeatures|length }} features failed of {{ (failedFeatures|length) + (passedFeatures|length) }}
-            features
+            {{ failedFeatures|length }} / {{ (failedFeatures|length) + (passedFeatures|length) }}
+            features contained failed scenarios
         </div>
         <div class="col-sm-4">
             <div class="canvas-holder">
                 <canvas id="chart-scenarios" width="300" height="300"/>
             </div>
-            {{ failedScenarios|length }} scenarios failed of {{ (failedScenarios|length) + (passedScenarios|length) }}
-            scenarios
+            {{ failedScenarios|length }} / {{ (failedScenarios|length) + (passedScenarios|length) + (skippedScenarios|length) + (pendingScenarios|length) }}
+            scenarios failed
         </div>
         <div class="col-sm-4">
             <div class="canvas-holder">
                 <canvas id="chart-steps" width="300" height="300"/>
             </div>
-            {{ failedSteps|length }} steps failed of {{ (failedSteps|length) + (passedSteps|length) }}
+            {{ failedSteps|length }} / {{ (failedSteps|length) + (passedSteps|length) + (skippedSteps|length) + (pendingSteps|length) }}
+            steps failed
         </div>
     </div>
     <hr>
@@ -182,24 +183,24 @@
                                      aria-labelledby="headingOne">
                                     <ul class="list-group">
                                         {% for step in scenario.steps %}
-                                        <li class="list-group-item alert alert-{% if step.isPassed %}success{% elseif step.isSkipped %}info{% elseif step.isPending %}warning{% else %}danger{% endif %}">
-                                            <b>{{ step.keyword }}</b> {{ step.text }}
-                                            {% if printStepArgs is not null %}
-                                                {% for argument in step.arguments %}
-                                                    <p style="padding-left:0.5em; overflow-x:scroll; white-space:nowrap; font-family:monospace">{{ argument | nl2br }}</p>
-                                                {% endfor %}
-                                            {% endif %}
-                                            {% if step.exception is not null %}
-                                                <br>
-                                                <p style="padding-left:2em ; color:gray">({{ step.exception }})</p>
-                                            {% endif %}
-                                            {% if step.output is not null %}
-                                                <br>
-                                                <p style="padding-left:2em ; color:black">| {{ step.output }}</p>
-                                            {% endif %}
-                                            {% if printLoopBreak is not null and ( loop.index % scenario.getLoopSize ) == 0 and loop.last != true  %}
-                                                </li><li class="list-group-item break">
-                                            {% endif %}
+                                            <li class="list-group-item alert alert-{% if step.isPassed %}success{% elseif step.isSkipped %}info{% elseif step.isPending %}warning{% else %}danger{% endif %}">
+                                                <b>{{ step.keyword }}</b> {{ step.text }}
+                                                {% if printStepArgs is not null %}
+                                                    {% for argument in step.arguments %}
+                                                        <p style="padding-left:0.5em; overflow-x:scroll; white-space:nowrap; font-family:monospace">{{ argument | nl2br }}</p>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% if step.exception is not null %}
+                                                    <br>
+                                                    <p style="padding-left:2em ; color:gray">({{ step.exception }})</p>
+                                                {% endif %}
+                                                {% if step.output is not null %}
+                                                    <br>
+                                                    <p style="padding-left:2em ; color:black">| {{ step.output }}</p>
+                                                {% endif %}
+                                                {% if printLoopBreak is not null and ( loop.index % scenario.getLoopSize ) == 0 and loop.last != true  %}
+                                                    </li><li class="list-group-item break">
+                                                {% endif %}
                                             </li>
                                             {#<div class="bs-callout bs-callout-{% if step.passed %}success{% else %}danger{% endif %}" id="callout-collapse-accessibility">#}
                                             {#<b>{{ step.keyword }}</b> {{ step.text }}#}
@@ -226,13 +227,13 @@
         {
             value: {{  failedFeatures|length}},
             color: "#F7464A",
-            highlight: "#FF5A5E",
+            highlight: "#ffff00",
             label: "Failed"
         },
         {
             value: {{  passedFeatures|length}},
             color: "#00a65a",
-            highlight: "#5AD3D1",
+            highlight: "#ffff00",
             label: "Passed"
         },
     ];
@@ -241,13 +242,25 @@
         {
             value: {{  failedScenarios|length}},
             color: "#F7464A",
-            highlight: "#FF5A5E",
+            highlight: "#ffff00",
             label: "Failed"
+        },
+        {
+            value: {{  pendingScenarios|length}},
+            color: "#f8efc0",
+            highlight: "#ffff00",
+            label: "Pending"
+        },
+        {
+            value: {{  skippedScenarios|length}},
+            color: "##f9f9f9",
+            highlight: "#ffff00",
+            label: "Skipped"
         },
         {
             value: {{  passedScenarios|length}},
             color: "#00a65a",
-            highlight: "#5AD3D1",
+            highlight: "#ffff00",
             label: "Passed"
         },
     ];
@@ -256,13 +269,25 @@
         {
             value: {{  failedSteps|length}},
             color: "#F7464A",
-            highlight: "#FF5A5E",
+            highlight: "#ffff00",
             label: "Failed"
+        },
+        {
+            value: {{  pendingSteps|length}},
+            color: "#f8efc0",
+            highlight: "#ffff00",
+            label: "Pending"
+        },
+        {
+            value: {{  skippedSteps|length}},
+            color: "##f9f9f9",
+            highlight: "#ffff00",
+            label: "Skipped"
         },
         {
             value: {{  passedSteps|length}},
             color: "#00a65a",
-            highlight: "#5AD3D1",
+            highlight: "#ffff00",
             label: "Passed"
         },
     ];

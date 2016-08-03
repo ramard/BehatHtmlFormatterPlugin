@@ -6,7 +6,7 @@
  * Time: 14:39
  */
 
-namespace emuse\BehatHTMLFormatter\Classes;
+namespace roydude\BehatHTMLFormatter\Classes;
 
 
 class Feature

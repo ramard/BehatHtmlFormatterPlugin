@@ -4,7 +4,7 @@
  * @author DaSayan <glennwall@free.fr>
  */
 
-namespace emuse\BehatHTMLFormatter\Renderer;
+namespace roydude\BehatHTMLFormatter\Renderer;
 
 class Behat2Renderer implements RendererInterface {
 

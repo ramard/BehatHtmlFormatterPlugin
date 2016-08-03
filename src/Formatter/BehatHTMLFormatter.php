@@ -1,6 +1,6 @@
 <?php
 
-namespace emuse\BehatHTMLFormatter\Formatter;
+namespace roydude\BehatHTMLFormatter\Formatter;
 
 use Behat\Behat\EventDispatcher\Event\AfterFeatureTested;
 use Behat\Behat\EventDispatcher\Event\AfterOutlineTested;
@@ -19,12 +19,12 @@ use Behat\Testwork\EventDispatcher\Event\BeforeSuiteTested;
 use Behat\Testwork\Output\Exception\BadOutputPathException;
 use Behat\Testwork\Output\Formatter;
 use Behat\Testwork\Output\Printer\OutputPrinter;
-use emuse\BehatHTMLFormatter\Classes\Feature;
-use emuse\BehatHTMLFormatter\Classes\Scenario;
-use emuse\BehatHTMLFormatter\Classes\Step;
-use emuse\BehatHTMLFormatter\Classes\Suite;
-use emuse\BehatHTMLFormatter\Printer\FileOutputPrinter;
-use emuse\BehatHTMLFormatter\Renderer\BaseRenderer;
+use roydude\BehatHTMLFormatter\Classes\Feature;
+use roydude\BehatHTMLFormatter\Classes\Scenario;
+use roydude\BehatHTMLFormatter\Classes\Step;
+use roydude\BehatHTMLFormatter\Classes\Suite;
+use roydude\BehatHTMLFormatter\Printer\FileOutputPrinter;
+use roydude\BehatHTMLFormatter\Renderer\BaseRenderer;
 
 /**
  * Class BehatHTMLFormatter

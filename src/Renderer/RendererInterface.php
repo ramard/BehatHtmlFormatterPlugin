@@ -6,7 +6,7 @@
  * Time: 10:45
  */
 
-namespace emuse\BehatHTMLFormatter\Renderer;
+namespace roydude\BehatHTMLFormatter\Renderer;
 
 interface RendererInterface {
 

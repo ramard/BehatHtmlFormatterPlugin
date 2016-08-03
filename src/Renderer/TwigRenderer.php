@@ -1,8 +1,8 @@
 <?php
 
-namespace emuse\BehatHTMLFormatter\Renderer ;
+namespace roydude\BehatHTMLFormatter\Renderer ;
 
-use emuse\BehatHTMLFormatter\Formatter\BehatHTMLFormatter;
+use roydude\BehatHTMLFormatter\Formatter\BehatHTMLFormatter;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -10,7 +10,7 @@ use Twig_Loader_Filesystem;
  * Twig renderer for Behat report
  *
  * Class TwigRenderer
- * @package emuse\BehatHTMLFormatter\Renderer
+ * @package roydude\BehatHTMLFormatter\Renderer
  */
 class TwigRenderer
 {

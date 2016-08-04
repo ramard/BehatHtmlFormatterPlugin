@@ -59,6 +59,23 @@ body {
   background-color: #f9f9f9;
   font-family: 'Source Sans Pro', sans-serif;
 }
+.chart-summary {
+  padding-left: 5px;
+  padding-right: 5px;
+  float: left;
+}
+.chart-summary.title {
+  font-weight: bold;
+}
+.chart-summary.failed {
+  background-color: #f56956;
+}
+.chart-summary.skipped {
+  background-color: #f4f4f4;
+}
+.chart-summary.pending {
+  background-color: #f8efc0;
+}
 .card {
   position: relative;
   background: #ffffff;
@@ -76,15 +93,14 @@ body {
   background-color: #00a65a;
 }
 .card.pending .header {
-  background-color: #000;
+  background-color: #f8efc0;
 }
 .card.skipped .header {
-  background-color: #fff;
+  background-color: #f4f4f4;
 }
 .card.failed .header {
   background-color: #f56956;
 }
-
 .card .header {
   color: #fff;
   border-top-left-radius: 3px;
@@ -160,6 +176,11 @@ body {
   background-color: #00a65a;
   background-image: none;
 }
+#scenario-overview .feature .details .panel.failed > .panel-heading {
+  color: white;
+  background-color: #f56956;
+  background-image: none;
+}
 #scenario-overview .feature .details .panel.pending > .panel-heading {
   color: black;
   background-color: #f8efc0;
@@ -169,13 +190,4 @@ body {
   color: black;
   background-color: #f4f4f4;
   background-image: none;
-}
-#scenario-overview .feature .details .panel.failed > .panel-heading {
-  color: white;
-  background-color: #f56956;
-  background-image: none;
-}
-.list-group-item.break {
-  padding: 1px;
-  background-color: #808080;
 }

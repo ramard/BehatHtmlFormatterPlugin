@@ -72,11 +72,11 @@ Activate the extension by specifying its class in your `behat.yml`:
 default:
   suites:
     ... # All your awesome suites come here
-  
-  formatters: 
+
+  formatters:
     html:
       output_path: %paths.base%/build/html/behat
-      
+
   extensions:
     roydude\BehatHTMLFormatter\BehatHTMLFormatterExtension:
       name: html
@@ -138,30 +138,28 @@ Below is an example of FeatureContext methods which will produce an image file i
             {
                 //create filename string
                 $featureFolder = str_replace(' ', '', $scope->getFeature()->getTitle());
-    
+
                 $scenarioName = $this->currentScenario->getTitle();
                 $fileName = str_replace(' ', '', $scenarioName) . '.png';
-    
+
                 //create screenshots directory if it doesn't exist
                 if (!file_exists('results/html/assets/screenshots/' . $featureFolder)) {
                     mkdir('results/html/assets/screenshots/' . $featureFolder);
                 }
-    
+
                 //take screenshot and save as the previously defined filename
                 $this->driver->takeScreenshot('results/html/assets/screenshots/' . $featureFolder . '/' . $fileName);
             }
         }
-        
+
 ```
 
-Note that the currentScenario variable will need to be at class level and generated in the @BeforeScenario method as Behat does not currently support obtaining the current Scenario in the @AfterStep method, where the screenshot is generated 
+Note that the currentScenario variable will need to be at class level and generated in the @BeforeScenario method as Behat does not currently support obtaining the current Scenario in the @AfterStep method, where the screenshot is generated
 
 ## Issue Submission
 
-When you need additional support or you discover something *strange*, feel free to [Create a new issue](https://github.com/dutchiexl/BehatHtmlFormatterPlugin/issues/new).
+When you need additional support or you discover something *strange*, feel free to [Create a new issue](https://github.com/roydude/BehatHtmlFormatterPlugin/issues/new).
 
 ## License and Authors
 
-Authors: https://github.com/dutchiexl/BehatHtmlFormatterPlugin/contributors
-
-
+Authors: https://github.com/roydude/BehatHtmlFormatterPlugin/contributors

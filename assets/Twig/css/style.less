@@ -11,6 +11,25 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+.chart-summary{
+  padding-left: 5px;
+  padding-right: 5px;
+  float: left;
+
+  &.title{
+    font-weight: bold;
+  }
+  &.failed{
+    background-color: @color-failed;
+  }
+  &.skipped{
+    background-color: @color-skipped;
+  }
+  &.pending{
+    background-color: @color-pending;
+  }
+}
+
 .card {
   position: relative;
   background: #ffffff;

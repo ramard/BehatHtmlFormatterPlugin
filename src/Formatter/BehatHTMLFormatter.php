@@ -636,7 +636,7 @@ class BehatHTMLFormatter implements Formatter {
                     $exception = $result->getException();
                     if($exception) {
                         $step->setException($exception->getMessage());
-                        if($result->getResultCode() == '99'){
+                        if('99' == $result->getResultCode()){
                                 $this->failedSteps[] = $step;
                         }
                     } else {

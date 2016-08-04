@@ -58,7 +58,7 @@
             <div class="chart-summary title">
               {{ (failedFeatures|length) + (passedFeatures|length) }} Features:
             </div>
-            <div class="chart-summary failed">{{ failedFeatures|length }}failed</div>
+            <div class="chart-summary failed">{{ failedFeatures|length }} failed</div>
         </div>
         <div class="col-sm-4">
             <div class="canvas-holder">
@@ -68,9 +68,9 @@
               {{ (failedScenarios|length) + (passedScenarios|length) + (skippedScenarios|length) + (pendingScenarios|length) }}
               Scenarios:
             </div>
-            <div class="chart-summary failed">{{ failedScenarios|length }}failed</div>
-            <div class="chart-summary skipped">{{ skippedScenarios|length }}skipped</div>
-            <div class="chart-summary pending">{{ pendingScenarios|length }}pending</div>
+            <div class="chart-summary failed">{{ failedScenarios|length }} failed</div>
+            <div class="chart-summary pending">{{ pendingScenarios|length }} pending</div>
+            <div class="chart-summary skipped">{{ skippedScenarios|length }} skipped</div>
         </div>
         <div class="col-sm-4">
             <div class="canvas-holder">
@@ -80,9 +80,9 @@
               {{ (failedSteps|length) + (passedSteps|length) + (skippedSteps|length) + (pendingSteps|length) }}
               Steps:
             </div>
-            <div class="chart-summary failed">{{ failedSteps|length }}failed</div>
-            <div class="chart-summary skipped">{{ skippedSteps|length }}skipped</div>
-            <div class="chart-summary pending">{{ pendingSteps|length }}pending</div>
+            <div class="chart-summary failed">{{ failedSteps|length }} failed</div>
+            <div class="chart-summary pending">{{ pendingSteps|length }} pending</div>
+            <div class="chart-summary skipped">{{ skippedSteps|length }} skipped</div>
         </div>
     </div>
     <hr>

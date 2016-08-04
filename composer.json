@@ -1,6 +1,6 @@
 {
     "name": "roydude/behat-html-formatter",
-    "description": "This will create a html formatter for Behat.",
+    "description": "Creates an HTML report for Behat tests (enhanced version of emuse/behat-html-formatter)",
     "authors": [
         {
             "name": "Roy Collings",

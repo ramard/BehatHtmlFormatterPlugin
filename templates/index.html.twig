@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Behat Tests</title>
+    <title>Automated test report</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -38,7 +38,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Behat report</a>
+            <a class="navbar-brand" href="#">Automated test report</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -223,73 +223,82 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+    var passedChartMain = "#00a65a";
+    var passedChartHighlight = "#00964a";
+    var failedChartMain = "#F7464A";
+    var failedChartHighlight = "#e7363A";
+    var skippedChartMain = "#f9f9f9";
+    var skippedChartHighlight = "#e9e9e9";
+    var pendingChartMain = "#f8efc0";
+    var pendingChartHighlight = "#e8dfb0";
+
     var featureData = [
         {
             value: {{  failedFeatures|length}},
-            color: "#F7464A",
-            highlight: "#ffff00",
+            color: failedChartMain,
+            highlight: failedChartHighlight,
             label: "Failed"
         },
         {
             value: {{  passedFeatures|length}},
-            color: "#00a65a",
-            highlight: "#ffff00",
+            color: passedChartMain,
+            highlight: passedChartHighlight,
             label: "Passed"
-        },
+        }
     ];
 
     var scenarioData = [
         {
             value: {{  failedScenarios|length}},
-            color: "#F7464A",
-            highlight: "#ffff00",
+            color: failedChartMain,
+            highlight: failedChartHighlight,
             label: "Failed"
         },
         {
             value: {{  pendingScenarios|length}},
-            color: "#f8efc0",
-            highlight: "#ffff00",
+            color: pendingChartMain,
+            highlight: pendingChartHighlight,
             label: "Pending"
         },
         {
             value: {{  skippedScenarios|length}},
-            color: "#f9f9f9",
-            highlight: "#ffff00",
+            color: skippedChartMain,
+            highlight: skippedChartHighlight,
             label: "Skipped"
         },
         {
             value: {{  passedScenarios|length}},
-            color: "#00a65a",
-            highlight: "#ffff00",
+            color: passedChartMain,
+            highlight: passedChartHighlight,
             label: "Passed"
-        },
+        }
     ];
 
     var stepData = [
         {
             value: {{  failedSteps|length}},
-            color: "#F7464A",
-            highlight: "#ffff00",
+            color: failedChartMain,
+            highlight: failedChartHighlight,
             label: "Failed"
         },
         {
             value: {{  pendingSteps|length}},
-            color: "#f8efc0",
-            highlight: "#ffff00",
+            color: pendingChartMain,
+            highlight: pendingChartHighlight,
             label: "Pending"
         },
         {
             value: {{  skippedSteps|length}},
-            color: "#f9f9f9",
-            highlight: "#ffff00",
+            color: skippedChartMain,
+            highlight: skippedChartHighlight,
             label: "Skipped"
         },
         {
             value: {{  passedSteps|length}},
-            color: "#00a65a",
-            highlight: "#ffff00",
+            color: passedChartMain,
+            highlight: passedChartHighlight,
             label: "Passed"
-        },
+        }
     ];
 
     window.onload = function () {

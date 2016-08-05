@@ -65,11 +65,11 @@
                 <canvas id="chart-scenarios" width="300" height="300"/>
             </div>
             <div class="chart-summary title">
-              {{ (failedScenarios|length) + (passedScenarios|length) + (skippedScenarios|length) + (pendingScenarios|length) }}
+              {{ (failedScenarios|length) + (passedScenarios|length) + (skippedScenarios|length) + (undefinedScenarios|length) }}
               Scenarios:
             </div>
             <div class="chart-summary failed">{{ failedScenarios|length }} failed</div>
-            <div class="chart-summary pending">{{ pendingScenarios|length }} pending</div>
+            <div class="chart-summary undefined">{{ undefinedScenarios|length }} undefined</div>
             <div class="chart-summary skipped">{{ skippedScenarios|length }} skipped</div>
         </div>
         <div class="col-sm-4">
@@ -77,11 +77,11 @@
                 <canvas id="chart-steps" width="300" height="300"/>
             </div>
             <div class="chart-summary title">
-              {{ (failedSteps|length) + (passedSteps|length) + (skippedSteps|length) + (pendingSteps|length) }}
+              {{ (failedSteps|length) + (passedSteps|length) + (skippedSteps|length) + (undefinedSteps|length) }}
               Steps:
             </div>
             <div class="chart-summary failed">{{ failedSteps|length }} failed</div>
-            <div class="chart-summary pending">{{ pendingSteps|length }} pending</div>
+            <div class="chart-summary undefined">{{ undefinedSteps|length }} undefined</div>
             <div class="chart-summary skipped">{{ skippedSteps|length }} skipped</div>
         </div>
     </div>
@@ -173,7 +173,7 @@
                     </div>
                     <div class="col-sm-8 details panel-group" role="tablist" aria-multiselectable="true">
                         {% for scenario in feature.scenarios %}
-                            <div class="panel panel-default {% if scenario.isPassed %}passed{% elseif scenario.isPending %}pending{% elseif scenario.isSkipped %}skipped{% else %}failed{% endif %}">
+                            <div class="panel panel-default {% if scenario.isPassed %}passed{% elseif scenario.isundefined %}undefined{% elseif scenario.isSkipped %}skipped{% else %}failed{% endif %}">
                                 <div class="panel-heading" role="tab">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion"
@@ -195,7 +195,7 @@
                                      aria-labelledby="headingOne">
                                     <ul class="list-group">
                                         {% for step in scenario.steps %}
-                                            <li class="list-group-item alert alert-{% if step.isPassed %}success{% elseif step.isSkipped %}info{% elseif step.isPending %}warning{% else %}danger{% endif %}">
+                                            <li class="list-group-item alert alert-{% if step.isPassed %}success{% elseif step.isSkipped %}info{% elseif step.isundefined %}warning{% else %}danger{% endif %}">
                                                 <b>{{ step.keyword }}</b> {{ step.text }}
                                                 {% if printStepArgs is not null %}
                                                     {% for argument in step.arguments %}
@@ -241,8 +241,8 @@
     var failedChartHighlight = "#e7363A";
     var skippedChartMain = "#f9f9f9";
     var skippedChartHighlight = "#e9e9e9";
-    var pendingChartMain = "#f8efc0";
-    var pendingChartHighlight = "#e8dfb0";
+    var undefinedChartMain = "#f8efc0";
+    var undefinedChartHighlight = "#e8dfb0";
 
     var featureData = [
         {
@@ -267,10 +267,10 @@
             label: "Failed"
         },
         {
-            value: {{  pendingScenarios|length}},
-            color: pendingChartMain,
-            highlight: pendingChartHighlight,
-            label: "Pending"
+            value: {{  undefinedScenarios|length}},
+            color: undefinedChartMain,
+            highlight: undefinedChartHighlight,
+            label: "undefined"
         },
         {
             value: {{  skippedScenarios|length}},
@@ -294,10 +294,10 @@
             label: "Failed"
         },
         {
-            value: {{  pendingSteps|length}},
-            color: pendingChartMain,
-            highlight: pendingChartHighlight,
-            label: "Pending"
+            value: {{  undefinedSteps|length}},
+            color: undefinedChartMain,
+            highlight: undefinedChartHighlight,
+            label: "undefined"
         },
         {
             value: {{  skippedSteps|length}},

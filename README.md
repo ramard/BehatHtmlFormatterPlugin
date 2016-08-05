@@ -99,8 +99,8 @@ default:
 * `print_outp` - (Optional) If set to `true`, Behat will add the output of each step to the report. (E.g. Exceptions).
 * `loop_break` - (Optional) If set to `true`, Behat will add a separating break line after each execution when printing Scenario Outlines.
 
-## Skipped (or 'blocked') tests
-To mark a test as skipped (may change this to 'blocked' at some point) make sure it exits with PendingExcpetion (un-intuative, I know, but this gives the scenario result a 'type' == 'skipped'), i.e.:
+## Blocked tests
+To mark a test as skipped make sure it exits with PendingExcpetion, i.e.:
 
 ```php
 throw new PendingException ("This scenario is blocked by bug MYPROJ-101");
@@ -172,5 +172,4 @@ When you need additional support or you discover something *strange*, feel free 
 Authors: https://github.com/roydude/BehatHtmlFormatterPlugin/contributors
 
 ## To do
-* Consider changing 'skipped' to 'blocked'.
-* Buttons for Skipped (blocked) and Pending.
+* Consider adding buttons for Skipped and Undefined.

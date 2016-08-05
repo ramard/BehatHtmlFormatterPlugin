@@ -161,7 +161,7 @@ class BehatHTMLFormatter implements Formatter {
     /**
      * @var Step[]
      */
-    private $pendingSteps;
+    private $undefinedSteps;
 
     /**
      * @var Step[]
@@ -373,7 +373,7 @@ class BehatHTMLFormatter implements Formatter {
         return $this->failedScenarios;
     }
 
-    public function getPendingScenarios()
+    public function getUndefinedScenarios()
     {
         return $this->pendingScenarios;
     }
@@ -408,9 +408,9 @@ class BehatHTMLFormatter implements Formatter {
         return $this->passedSteps;
     }
 
-    public function getPendingSteps()
+    public function getundefinedSteps()
     {
-        return $this->pendingSteps;
+        return $this->undefinedSteps;
     }
 
     public function getSkippedSteps()
@@ -523,7 +523,7 @@ class BehatHTMLFormatter implements Formatter {
     public function onAfterScenarioTested(AfterScenarioTested $event)
     {
         $this->currentScenario->setPassed(false);
-        $this->currentScenario->setPending(false);
+        $this->currentScenario->setUndefined(false);
         $this->currentScenario->setSkipped(false);
 
         switch($event->getTestResult()->getResultCode()){
@@ -535,8 +535,8 @@ class BehatHTMLFormatter implements Formatter {
             case '10':
             case '30':
                 $this->pendingScenarios[] = $this->currentScenario;
-                $this->currentFeature->addPendingScenario();
-                $this->currentScenario->setPending(true);
+                $this->currentFeature->addUndefinedScenario();
+                $this->currentScenario->setUndefined(true);
                 break;
             case '20':
                 $this->skippedScenarios[] = $this->currentScenario;
@@ -624,9 +624,11 @@ class BehatHTMLFormatter implements Formatter {
         $step->setResultCode($result->getResultCode());
 
         if(is_a($result, 'Behat\Behat\Tester\Result\UndefinedStepResult')) {
-            $this->pendingSteps[] = $step;
+          $this->printText("ROYDEBUG - undefined\n");//@todo remove
+            $this->undefinedSteps[] = $step;
         } else {
             if(is_a($result, 'Behat\Behat\Tester\Result\SkippedStepResult')) {
+              $this->printText("ROYDEBUG - skipped\n");//@todo remove
                 /** @var ExecutedStepResult $result */
                 $step->setDefinition($result->getStepDefinition());
                 $this->skippedSteps[] = $step;
@@ -635,11 +637,13 @@ class BehatHTMLFormatter implements Formatter {
                     $step->setDefinition($result->getStepDefinition());
                     $exception = $result->getException();
                     if($exception) {
+                      $this->printText("ROYDEBUG - failed\n");//@todo remove
                         $step->setException($exception->getMessage());
                         if('99' == $result->getResultCode()){
                                 $this->failedSteps[] = $step;
                         }
                     } else {
+                      $this->printText("ROYDEBUG - passed\n");//@todo remove
                         $step->setOutput($result->getCallResult()->getStdOut());
                         $this->passedSteps[] = $step;
                     }

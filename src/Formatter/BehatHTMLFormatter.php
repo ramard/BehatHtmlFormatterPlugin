@@ -624,11 +624,9 @@ class BehatHTMLFormatter implements Formatter {
         $step->setResultCode($result->getResultCode());
 
         if(is_a($result, 'Behat\Behat\Tester\Result\UndefinedStepResult')) {
-          $this->printText("ROYDEBUG - undefined\n");//@todo remove
             $this->undefinedSteps[] = $step;
         } else {
             if(is_a($result, 'Behat\Behat\Tester\Result\SkippedStepResult')) {
-              $this->printText("ROYDEBUG - skipped\n");//@todo remove
                 /** @var ExecutedStepResult $result */
                 $step->setDefinition($result->getStepDefinition());
                 $this->skippedSteps[] = $step;
@@ -637,13 +635,11 @@ class BehatHTMLFormatter implements Formatter {
                     $step->setDefinition($result->getStepDefinition());
                     $exception = $result->getException();
                     if($exception) {
-                      $this->printText("ROYDEBUG - failed\n");//@todo remove
                         $step->setException($exception->getMessage());
                         if('99' == $result->getResultCode()){
                                 $this->failedSteps[] = $step;
                         }
                     } else {
-                      $this->printText("ROYDEBUG - passed\n");//@todo remove
                         $step->setOutput($result->getCallResult()->getStdOut());
                         $this->passedSteps[] = $step;
                     }

@@ -29,7 +29,7 @@ class Scenario
     /**
      * @var bool
      */
-    private $pending;
+    private $undefined;
 
     /**
      * @var bool
@@ -125,9 +125,9 @@ class Scenario
     /**
      * @return boolean
      */
-    public function isPending()
+    public function isUndefined()
     {
-        return $this->pending;
+        return $this->undefined;
     }
 
     /**
@@ -149,9 +149,9 @@ class Scenario
     /**
      * @param boolean $passed
      */
-    public function setPending($passed)
+    public function setUndefined($passed)
     {
-        $this->pending = $passed;
+        $this->undefined = $passed;
     }
 
     /**

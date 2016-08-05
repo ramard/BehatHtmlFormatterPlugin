@@ -165,7 +165,7 @@ class Step
     {
         $this->resultCode = $resultCode;
     }
-    
+
      /**
      * @return bool
      */
@@ -173,7 +173,7 @@ class Step
     {
         return $this->resultCode == StepResult::PASSED;
     }
-    
+
      /**
      * @return bool
      */
@@ -181,15 +181,15 @@ class Step
     {
         return $this->resultCode == StepResult::SKIPPED;
     }
-    
+
      /**
      * @return bool
      */
-    public function isPending()
+    public function isUndefined()
     {
         return ($this->resultCode == StepResult::PENDING || $this->resultCode == StepResult::UNDEFINED);
     }
-    
+
      /**
      * @return bool
      */

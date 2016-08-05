@@ -73,7 +73,7 @@ body {
 .chart-summary.skipped {
   background-color: #f4f4f4;
 }
-.chart-summary.pending {
+.chart-summary.undefined {
   background-color: #f8efc0;
 }
 .card {
@@ -92,7 +92,7 @@ body {
 .card.passed .header {
   background-color: #00a65a;
 }
-.card.pending .header {
+.card.undefined .header {
   background-color: #f8efc0;
 }
 .card.skipped .header {
@@ -181,7 +181,7 @@ body {
   background-color: #f56956;
   background-image: none;
 }
-#scenario-overview .feature .details .panel.pending > .panel-heading {
+#scenario-overview .feature .details .panel.undefined > .panel-heading {
   color: black;
   background-color: #f8efc0;
   background-image: none;

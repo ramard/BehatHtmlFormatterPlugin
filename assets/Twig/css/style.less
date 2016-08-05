@@ -4,7 +4,7 @@
 @color-failed: #F56956;
 @color-passed: #00a65a;
 @color-skipped: #f4f4f4;
-@color-pending: #f8efc0;
+@color-undefined: #f8efc0;
 
 body {
   background-color: #f9f9f9;
@@ -25,8 +25,8 @@ body {
   &.skipped{
     background-color: @color-skipped;
   }
-  &.pending{
-    background-color: @color-pending;
+  &.undefined{
+    background-color: @color-undefined;
   }
 }
 
@@ -50,9 +50,9 @@ body {
     }
   }
 
-  &.pending {
+  &.undefined {
     .header {
-      background-color: @color-pending;
+      background-color: @color-undefined;
     }
   }
 
@@ -166,10 +166,10 @@ body {
             background-image: none;
           }
         }
-        &.pending {
+        &.undefined {
           > .panel-heading {
             color: black;
-            background-color: @color-pending;
+            background-color: @color-undefined;
             background-image: none;
           }
         }

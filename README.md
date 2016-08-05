@@ -102,7 +102,8 @@ default:
 ## Skipped (or 'blocked') tests
 To mark a test as skipped (may change this to 'blocked' at some point) make sure it exits with PendingExcpetion (un-intuative, I know, but this gives the scenario result a 'type' == 'skipped'), i.e.:
 
-```throw new PendingException ("This scenario is blocked by bug MYPROJ-101");
+```php
+throw new PendingException ("This scenario is blocked by bug MYPROJ-101");
 ```
 
 ## Screenshot

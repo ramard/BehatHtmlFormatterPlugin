@@ -6,7 +6,7 @@ Behat 3 extension for generating HTML reports from your test results.
 
 ### Twig report
 
-![Twig Screenshot](http://imgur.com/SFSQjNJ)
+![Twig Screenshot](http://i.imgur.com/SFSQjNJ.png)
 
 ### Behat 2 report
 

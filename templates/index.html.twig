@@ -93,7 +93,7 @@
     </div>
     <hr>
     <div id="feature-overview">
-        {% for suite in suites %}
+        {% for suite in suites if not '(noreport)' in suite.name %}
             <div class="row">
                 <div class="col-sm-12">
                     <h2>Suite: {{ suite.name }}</h2>
@@ -173,7 +173,7 @@
                     </div>
                     <div class="col-sm-8 details panel-group" role="tablist" aria-multiselectable="true">
                         {% for scenario in feature.scenarios %}
-                            <div class="panel panel-default {% if scenario.isPassed %}passed{% elseif scenario.isundefined %}undefined{% elseif scenario.isSkipped %}skipped{% else %}failed{% endif %}">
+                            <div class="panel panel-default {% if scenario.isPassed %}passed{% elseif scenario.isUndefined %}undefined{% elseif scenario.isSkipped %}skipped{% else %}failed{% endif %}">
                                 <div class="panel-heading" role="tab">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion"
@@ -195,7 +195,7 @@
                                      aria-labelledby="headingOne">
                                     <ul class="list-group">
                                         {% for step in scenario.steps %}
-                                            <li class="list-group-item alert alert-{% if step.isPassed %}success{% elseif step.isSkipped %}info{% elseif step.isundefined %}warning{% else %}danger{% endif %}">
+                                            <li class="list-group-item alert alert-{% if step.isPassed %}success{% elseif step.isSkipped %}info{% elseif step.isUndefined %}warning{% else %}danger{% endif %}">
                                                 <b>{{ step.keyword }}</b> {{ step.text }}
                                                 {% if printStepArgs is not null %}
                                                     {% for argument in step.arguments %}
@@ -270,7 +270,7 @@
             value: {{  undefinedScenarios|length}},
             color: undefinedChartMain,
             highlight: undefinedChartHighlight,
-            label: "undefined"
+            label: "Undefined"
         },
         {
             value: {{  skippedScenarios|length}},
@@ -297,7 +297,7 @@
             value: {{  undefinedSteps|length}},
             color: undefinedChartMain,
             highlight: undefinedChartHighlight,
-            label: "undefined"
+            label: "Undefined"
         },
         {
             value: {{  skippedSteps|length}},

@@ -93,7 +93,7 @@
     </div>
     <hr>
     <div id="feature-overview">
-        {% for suite in suites if not '(noreport)' in suite.name %}
+        {% for suite in suites if '(noreport)' not in suite.name %}
             <div class="row">
                 <div class="col-sm-12">
                     <h2>Suite: {{ suite.name }}</h2>

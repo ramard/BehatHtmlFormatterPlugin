@@ -9,6 +9,7 @@ default:
             name: html
             renderer: Twig
             file_name: index
+            results_path: /var/www/web/results
             print_args: true
             print_outp: true
             loop_break: true

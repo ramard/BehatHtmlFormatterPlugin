@@ -56,7 +56,7 @@
                 <canvas id="chart-features" width="300" height="300"/>
             </div>
             <div class="chart-summary title">
-              {{ (failedFeatures|length) + (passedFeatures|length) }} Features:
+                {{ (failedFeatures|length) + (passedFeatures|length) }} Features:
             </div>
             <div class="chart-summary failed">{{ failedFeatures|length }} failed</div>
         </div>
@@ -65,8 +65,8 @@
                 <canvas id="chart-scenarios" width="300" height="300"/>
             </div>
             <div class="chart-summary title">
-              {{ (failedScenarios|length) + (passedScenarios|length) + (skippedScenarios|length) + (undefinedScenarios|length) }}
-              Scenarios:
+                {{ (failedScenarios|length) + (passedScenarios|length) + (skippedScenarios|length) + (undefinedScenarios|length) }}
+                Scenarios:
             </div>
             <div class="chart-summary failed">{{ failedScenarios|length }} failed</div>
             <div class="chart-summary undefined">{{ undefinedScenarios|length }} undefined</div>
@@ -77,8 +77,8 @@
                 <canvas id="chart-steps" width="300" height="300"/>
             </div>
             <div class="chart-summary title">
-              {{ (failedSteps|length) + (passedSteps|length) + (skippedSteps|length) + (undefinedSteps|length) }}
-              Steps:
+                {{ (failedSteps|length) + (passedSteps|length) + (skippedSteps|length) + (undefinedSteps|length) }}
+                Steps:
             </div>
             <div class="chart-summary failed">{{ failedSteps|length }} failed</div>
             <div class="chart-summary undefined">{{ undefinedSteps|length }} undefined</div>
@@ -195,24 +195,27 @@
                                      aria-labelledby="headingOne">
                                     <ul class="list-group">
                                         {% for step in scenario.steps %}
-                                            <li class="list-group-item alert alert-{% if step.isPassed %}success{% elseif step.isSkipped %}info{% elseif step.isUndefined %}warning{% else %}danger{% endif %}">
-                                                <b>{{ step.keyword }}</b> {{ step.text }}
-                                                {% if printStepArgs is not null %}
-                                                    {% for argument in step.arguments %}
-                                                        <p style="padding-left:0.5em; overflow-x:scroll; white-space:nowrap; font-family:monospace">{{ argument | nl2br }}</p>
-                                                    {% endfor %}
+                                        <li class="list-group-item alert alert-{% if step.isPassed %}success{% elseif step.isSkipped %}info{% elseif step.isUndefined %}warning{% else %}danger{% endif %}">
+                                            <b>{{ step.keyword }}</b> {{ step.text }}
+                                            {% if printStepArgs is not null %}
+                                                {% for argument in step.arguments %}
+                                                    <p style="padding-left:0.5em; overflow-x:scroll; white-space:nowrap; font-family:monospace">{{ argument | nl2br }}</p>
+                                                {% endfor %}
+                                            {% endif %}
+                                            {% if step.exception is not null %}
+                                                <br>
+                                                {% if step.screenshot is not null %}
+                                                    <a style="float:right" target="_blank" href="{{ step.screenshot }}">SCREENSHOT</a>
                                                 {% endif %}
-                                                {% if step.exception is not null %}
-                                                    <br>
-                                                    <p style="padding-left:2em ; color:gray">({{ step.exception }})</p>
-                                                {% endif %}
-                                                {% if step.output is not null %}
-                                                    <br>
-                                                    <p style="padding-left:2em ; color:black">| {{ step.output }}</p>
-                                                {% endif %}
-                                                {% if printLoopBreak is not null and ( loop.index % scenario.getLoopSize ) == 0 and loop.last != true  %}
-                                                    </li><li class="list-group-item break">
-                                                {% endif %}
+                                                <p style="padding-left:2em ; color:gray">({{ step.exception }})</p>
+                                            {% endif %}
+                                            {% if step.output is not null %}
+                                                <br>
+                                                <p style="padding-left:2em ; color:black">| {{ step.output }}</p>
+                                            {% endif %}
+                                            {% if printLoopBreak is not null and ( loop.index % scenario.getLoopSize ) == 0 and loop.last != true  %}
+                                                </li><li class="list-group-item break">
+                                            {% endif %}
                                             </li>
                                             {#<div class="bs-callout bs-callout-{% if step.passed %}success{% else %}danger{% endif %}" id="callout-collapse-accessibility">#}
                                             {#<b>{{ step.keyword }}</b> {{ step.text }}#}

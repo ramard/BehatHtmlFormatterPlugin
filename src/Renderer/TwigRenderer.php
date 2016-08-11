@@ -53,6 +53,7 @@ class TwigRenderer
                 'printStepArgs' => $obj->getPrintArguments(),
                 'printStepOuts' => $obj->getPrintOutputs(),
                 'printLoopBreak' => $obj->getPrintLoopBreak(),
+                'resultsPath' => $obj->getResultsPath(),
             )
         );
 

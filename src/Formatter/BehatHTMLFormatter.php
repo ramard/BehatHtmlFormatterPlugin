@@ -25,6 +25,7 @@ use roydude\BehatHTMLFormatter\Classes\Step;
 use roydude\BehatHTMLFormatter\Classes\Suite;
 use roydude\BehatHTMLFormatter\Printer\FileOutputPrinter;
 use roydude\BehatHTMLFormatter\Renderer\BaseRenderer;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * Class BehatHTMLFormatter
@@ -57,6 +58,11 @@ class BehatHTMLFormatter implements Formatter {
      * @param String $outputPath where to save the generated report file
      */
     private $outputPath;
+
+    /**
+     * @param String
+     */
+    private $results_path;
 
     /**
      * @param String $base_path Behat base path
@@ -175,9 +181,10 @@ class BehatHTMLFormatter implements Formatter {
      * @param $name
      * @param $base_path
      */
-    function __construct($name, $renderer, $filename, $print_args, $print_outp, $loop_break, $base_path)
+    function __construct($name, $renderer, $filename, $print_args, $print_outp, $loop_break, $base_path, $flobblywobbly)
     {
         $this->name = $name;
+        $this->results_path = $flobblywobbly;
         $this->base_path = $base_path;
         $this->print_args = $print_args;
         $this->print_outp = $print_outp;
@@ -307,6 +314,15 @@ class BehatHTMLFormatter implements Formatter {
     }
 
     /**
+     * Returns output path
+     * @return String output path
+     */
+    public function getResultsPath()
+    {
+        return $this->results_path;
+    }
+
+    /**
      * Returns if it should print the step arguments
      * @return boolean
      */
@@ -408,7 +424,7 @@ class BehatHTMLFormatter implements Formatter {
         return $this->passedSteps;
     }
 
-    public function getundefinedSteps()
+    public function getUndefinedSteps()
     {
         return $this->undefinedSteps;
     }
@@ -626,18 +642,31 @@ class BehatHTMLFormatter implements Formatter {
         if(is_a($result, 'Behat\Behat\Tester\Result\UndefinedStepResult')) {
             $this->undefinedSteps[] = $step;
         } else {
-            if(is_a($result, 'Behat\Behat\Tester\Result\SkippedStepResult')) {
+            if (is_a($result, 'Behat\Behat\Tester\Result\SkippedStepResult')) {
                 /** @var ExecutedStepResult $result */
                 $step->setDefinition($result->getStepDefinition());
                 $this->skippedSteps[] = $step;
             } else {
-                if($result instanceof ExecutedStepResult) {
+                if ($result instanceof ExecutedStepResult) {
                     $step->setDefinition($result->getStepDefinition());
                     $exception = $result->getException();
-                    if($exception) {
+                    if ($exception) {
                         $step->setException($exception->getMessage());
-                        if('99' == $result->getResultCode()){
-                                $this->failedSteps[] = $step;
+
+                        // Fail - if there's a screenshot for this, then use it.
+                        $screenShot = sprintf(
+                            'screenshots/%s-%s.png',
+                            str_replace(' ', '', $event->getFeature()->getTitle()),
+                            $event->getStep()->getLine()
+                        );
+
+                        //$this->getResultsPath(), //@todo - figure out how to pass this via behat.yml
+                        if (is_file('/var/www/web/screenshots/'.$screenShot)) {
+                            $step->setScreenShot($screenShot);
+                        }
+
+                        if ('99' == $result->getResultCode()) {
+                            $this->failedSteps[] = $step;
                         }
                     } else {
                         $step->setOutput($result->getCallResult()->getStdOut());

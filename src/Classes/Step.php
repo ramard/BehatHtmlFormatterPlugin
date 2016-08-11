@@ -19,6 +19,7 @@ class Step
     private $result;
     private $resultCode;
     private $exception;
+    private $screenShot;
     private $output;
     private $definition;
 
@@ -119,6 +120,22 @@ class Step
     }
 
     /**
+     * @param $fileName
+     */
+    public function setScreenShot($fileName)
+    {
+        $this->screenShot = $fileName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScreenShot()
+    {
+        return $this->screenShot;
+    }
+
+    /**
      * @return mixed
      */
     public function getDefinition()
@@ -166,7 +183,7 @@ class Step
         $this->resultCode = $resultCode;
     }
 
-     /**
+    /**
      * @return bool
      */
     public function isPassed()
@@ -174,7 +191,7 @@ class Step
         return $this->resultCode == StepResult::PASSED;
     }
 
-     /**
+    /**
      * @return bool
      */
     public function isSkipped()
@@ -182,7 +199,7 @@ class Step
         return $this->resultCode == StepResult::SKIPPED;
     }
 
-     /**
+    /**
      * @return bool
      */
     public function isUndefined()
@@ -190,7 +207,7 @@ class Step
         return ($this->resultCode == StepResult::PENDING || $this->resultCode == StepResult::UNDEFINED);
     }
 
-     /**
+    /**
      * @return bool
      */
     public function isFailed()

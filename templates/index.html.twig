@@ -109,11 +109,6 @@
                                         {#<p>{{ feature.description|raw|nl2br }}</p>#}
                                     {#</div>#}
                                     {#<div class="footer">#}
-                                        {#<div class="tags">#}
-                                            {#{% for tag in feature.tags %}#}
-                                                {#<span class="badge">{{ tag }}</span>#}
-                                            {#{% endfor %}#}
-                                        {#</div>#}
                                         {% if feature.getTotalAmountOfScenarios > 0 %}
                                             <div class="progress">
                                                     {#<h2>Feature: {{ feature.name }}</h2>#}
@@ -126,7 +121,14 @@
                                                      style="width: {{ feature.getPercentFailed }}%">
                                                     <span class="sr-only">40% Complete (success)</span>
                                                 </div>
-                                                <div style="position: absolute"><h2>{{ feature.name }}</h2></div>
+                                                <div style="position: absolute">
+                                                    <h2>{{ feature.name }}</h2>
+                                                </div>
+                                                <div class="tags" style="position: absolute; text-align: right; width: 100%">
+                                                    {% for tag in feature.tags %}
+                                                    <span class="badge">{{ tag }}</span>
+                                                    {% endfor %}
+                                                </div>
                                             </div>
                                         {% endif %}
                                     </div>
@@ -146,30 +148,25 @@
                     <div class="col-sm-4">
                         <div class="card {{ feature.getPassedClass }}">
                             <div class="header">
-                                <h2>Feature: {{ feature.name }}</h2>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-green" role="progressbar"
+                                         style="width: {{ feature.getPercentPassed }}%">
+                                        <span class="sr-only">40% Complete (success)</span>
+                                    </div>
+                                    <div class="progress-bar progress-bar-red" role="progressbar"
+                                         style="width: {{ feature.getPercentFailed }}%">
+                                        <span class="sr-only">40% Complete (success)</span>
+                                    </div>
+                                    <div style="position: absolute"><h2>{{ feature.name }}</h2></div>
+                                    <div class="tags" style="position: absolute; text-align: right; width: 100%">
+                                        {% for tag in feature.tags %}
+                                            <span class="badge">{{ tag }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
                             </div>
                             <div class="info">
                                 <p>{{ feature.description|raw|nl2br }}</p>
-                            </div>
-                            <div class="footer">
-                                <div class="tags">
-                                    {% for tag in feature.tags %}
-                                        <span class="badge">{{ tag }}</span>
-                                    {% endfor %}
-                                </div>
-                                {% if feature.getTotalAmountOfScenarios > 0 %}
-                                    <div class="progress">
-
-                                        <div class="progress-bar progress-bar-green" role="progressbar"
-                                             style="width: {{ feature.getPercentPassed }}%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                        <div class="progress-bar progress-bar-red" role="progressbar"
-                                             style="width: {{ feature.getPercentFailed }}%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -182,7 +179,7 @@
                                            href="#scenario-{{ feature.id }}-{{ scenario.id }}"
                                            aria-expanded="true"
                                            aria-controls="scenario-{{ feature.id }}-{{ scenario.id }}">
-                                            Scenario: {{ scenario.name }}
+                                            {{ scenario.name }}
                                         </a>
 
                                         <div class="tags pull-right">

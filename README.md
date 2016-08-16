@@ -1,16 +1,14 @@
 ## BehatHtmlFormatterPlugin
 
-Behat 3 extension for generating HTML reports from your test results.
+Behat 3 extension for generating HTML reports from your test results (custom version of the original from emuse: https://github.com/dutchiexl/BehatHtmlFormatterPlugin).
+The changes I have made only relate to the Twig report (see below).
 
 [![Latest Stable Version](https://poser.pugx.org/roydude/behat-html-formatter/v/stable)](https://packagist.org/packages/roydude/behat-html-formatter) [![Total Downloads](https://poser.pugx.org/roydude/behat-html-formatter/downloads)](https://packagist.org/packages/roydude/behat-html-formatter) [![Latest Unstable Version](https://poser.pugx.org/roydude/behat-html-formatter/v/unstable)](https://packagist.org/packages/roydude/behat-html-formatter) [![License](https://poser.pugx.org/roydude/behat-html-formatter/license)](https://packagist.org/packages/roydude/behat-html-formatter)
 
 ### Twig report
 
-![Twig Screenshot](http://i.imgur.com/SFSQjNJ.png)
-
-### Behat 2 report
-
-![Behat2 Screenshot](http://i57.tinypic.com/287g942.jpg)
+![Twig Screenshot](http://i.imgur.com/ytnIvPV.png)
+![Twig Screenshot](http://i.imgur.com/PSdfL3Y.png)
 
 
 ## How?
@@ -80,7 +78,7 @@ default:
   extensions:
     roydude\BehatHTMLFormatter\BehatHTMLFormatterExtension:
       name: html
-      renderer: Twig,Behat2
+      renderer: Twig
       file_name: index
       print_args: true
       print_outp: true
@@ -91,9 +89,7 @@ default:
 
 * `output_path` - The location where Behat will save the HTML reports. The path defined here is relative to `%paths.base%` and, when omitted, will be default set to the same path.
 * `renderer` - The engine that Behat will use for rendering, thus the types of report format Behat should output (multiple report formats are allowed, separate them by commas). Allowed values are:
- * *Behat2* for generating HTML reports like they were generated in Behat 2.
  * *Twig* A new and more modern format based on Twig.
- * *Minimal* An ultra minimal HTML output.
 * `file_name` - (Optional) Behat will use a fixed filename and overwrite the same file after each build. By default, Behat will create a new HTML file using a random name (*"renderer name"*_*"date hour"*).
 * `print_args` - (Optional) If set to `true`, Behat will add all arguments for each step to the report. (E.g. Tables).
 * `print_outp` - (Optional) If set to `true`, Behat will add the output of each step to the report. (E.g. Exceptions).
@@ -173,3 +169,4 @@ Authors: https://github.com/roydude/BehatHtmlFormatterPlugin/contributors
 
 ## To do
 * Consider adding buttons for Skipped and Undefined.
+* Simplify screenshots.

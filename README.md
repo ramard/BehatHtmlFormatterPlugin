@@ -87,9 +87,10 @@ default:
 
 ## Configuration
 
+* Makeing `(noreport)` part of a test suit name will mean it's excuded from the report (handy for cache tests, for example, which aren't so interesting to business users who read the report).
 * `output_path` - The location where Behat will save the HTML reports. The path defined here is relative to `%paths.base%` and, when omitted, will be default set to the same path.
 * `renderer` - The engine that Behat will use for rendering, thus the types of report format Behat should output (multiple report formats are allowed, separate them by commas). Allowed values are:
- * *Twig* A new and more modern format based on Twig.
+ * *Twig* A new and modern report format based on Twig.
 * `file_name` - (Optional) Behat will use a fixed filename and overwrite the same file after each build. By default, Behat will create a new HTML file using a random name (*"renderer name"*_*"date hour"*).
 * `print_args` - (Optional) If set to `true`, Behat will add all arguments for each step to the report. (E.g. Tables).
 * `print_outp` - (Optional) If set to `true`, Behat will add the output of each step to the report. (E.g. Exceptions).
